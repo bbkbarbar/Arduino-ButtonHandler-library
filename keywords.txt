@@ -1,7 +1,9 @@
-buttonhandler	KEYWORD1
+ButtonHandler	KEYWORD1
+init	KEYWORD2
 getPressed	KEYWORD2
 isPressed	KEYWORD2
-isReleased	KEYWORD2
+isPressedAny	KEYWORD2
+isReleasedAll	KEYWORD2
 
 BTN_UNDEFINED	KEYWORD3
 NOTHING_PRESSED	KEYWORD3

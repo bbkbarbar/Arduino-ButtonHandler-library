@@ -10,7 +10,7 @@
 	#endif
 
 
-class buttonhandler {
+class ButtonHandler {
 
 	private:
 		int btnCount;
@@ -33,9 +33,10 @@ class buttonhandler {
 		 */
 	    int getPressed();
 
+	    int isPressed(unsigned short btnId);
 	    
-	    int isPressed();
-	    int isReleased();
+	    int isPressedAny();
+	    int isReleasedAll();
 };
 
 #endif

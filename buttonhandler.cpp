@@ -25,24 +25,25 @@
 // Arr[3]: {50,                  341,                     682,                    1023}
 
 
-unsigned short *boundaries;
+unsigned short* boundaries;
 
 
-void buttonhandler::init(int adcPin, int buttonCount){
+void ButtonHandler::init(int adcPin, int buttonCount){
 	myAdcPin = adcPin;
 	btnCount = buttonCount;
 
-	unsigned short[(btnCount+1)] array;
-	array[0] = THRESHOLD_NOTHING_PRESSED; 	// fixed lower boundary for first button
+	unsigned short array[(btnCount+1)];
+	boundaries = array;
+	boundaries[0] = THRESHOLD_NOTHING_PRESSED; 	// fixed lower boundary for first button
 
 	unsigned short i = 0;
 	for(i=1; i<btnCount; i++){
-		array[i] = (unsigned short)((ADC_MAX / btnCount) * i);
+		boundaries[i] = (unsigned short)((ADC_MAX / btnCount) * i);
 	}
 
-	array[btnCount] = ADC_MAX;
+	boundaries[btnCount] = ADC_MAX;
 
-	*boundaries = &array[0];
+	boundaries = array;
 	//*boundaries = array;
 }
 
@@ -52,7 +53,7 @@ void buttonhandler::init(int adcPin, int buttonCount){
  *  Valid ID range: [1..buttonCount]
  *  or returns 0 if no button pressed currently.
  */
-int buttonhandler::getButtonIdForValue(int value){
+int ButtonHandler::getButtonIdForValue(int value){
 
 	if((value >= 0) && (value < THRESHOLD_NOTHING_PRESSED)){
 		return NOTHING_PRESSED;
@@ -71,18 +72,20 @@ int buttonhandler::getButtonIdForValue(int value){
 
 }
 
-
-int buttonhandler::getPressed(){
+int ButtonHandler::getPressed(){
 	int adcVal = analogRead(myAdcPin);
-	return buttonhandler::getButtonIdForValue(adcVal);
+	return ButtonHandler::getButtonIdForValue(adcVal);
+}
+
+int ButtonHandler::isPressed(unsigned short btnId){
+	return ((ButtonHandler::getPressed() == btnId)?1:0);
+}
+
+int ButtonHandler::isPressedAny(){
+	return ((ButtonHandler::getPressed() > NOTHING_PRESSED)?1:0);
 }
 
 
-int buttonhandler::isPressed(){
-	return ((buttonhandler::getPressed() > NOTHING_PRESSED)?1:0);
-}
-
-
-int buttonhandler::isReleased(){
-	return ((buttonhandler::isPressed() == NOTHING_PRESSED)?1:0);
+int ButtonHandler::isReleasedAll(){
+	return ((ButtonHandler::isPressedAny() == 0)?1:0);
 }
