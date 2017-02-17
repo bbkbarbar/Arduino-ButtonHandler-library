@@ -19,6 +19,7 @@ but we don't want to calculate the with pull-down resistor as part of the voltag
 
 
 ### Most used functions
+###### Initialize
 ```
 void init(int adcPin, int buttonCount);
 
@@ -30,6 +31,7 @@ void init(int adcPin, int buttonCount);
  */
 ```
 
+###### Read state of buttons
 ```
 int getPressed();
 
