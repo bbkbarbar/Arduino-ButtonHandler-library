@@ -7,27 +7,27 @@
 #define THRESHOLD_NOTHING_PRESSED    50
 #define NOTHING_PRESSED               0
 #ifndef MAX_BUTTON_COUNT
-	#define MAX_BUTTON_COUNT		 20
+	#define MAX_BUTTON_COUNT         20
 #endif
 
 // btn count = 2
-//                   btn1			           btn2
+//                   btn1                     btn2
 //         THNP ............... MAX/2*1  ............... MAX/2*2
-//                 0..MAX/2                MAX/2 .. MAX    
-// Arr[2]:	THNP    MAX/2*1                    MAX/2*2        
+//                 0..MAX/2                MAX/2 .. MAX
+// Arr[2]: THNP    MAX/2*1                    MAX/2*2
 
 
 // btn count = 3
-//  GND     1k		 BTN1        1k           BTN2        1k        BTN3         1k       VCC
-//	0.00 ............1.25V ................. 2.50V ................ 3,75V ............... 5.00V--	
+//  GND     1k       BTN1        1k           BTN2        1k        BTN3         1k       VCC
+//	0.00 ............1.25V ................. 2.50V ................ 3,75V ............... 5.00V--
 //  0............... 255 .................... 512 ...................767 ................ 1023
-//                   btn1			          btn2                   btn3
+//                   btn1                     btn2                   btn3
 //            0 ............... MAX/3*1 ............... MAX/3*2 ............... MAX/3*3
-//                0..MAX/3*1          MAX/3*1 .. MAX/3*2    
-// Arr[3]: THNP,   MAX/3*1,                 MAX/3*2,                MAX/3*3     
-// Arr[3]: {50,                  341,                     682,                    1023}
+//                0..MAX/3*1          MAX/3*1 .. MAX/3*2
+// Arr[3]: THNP,   MAX/3*1,                 MAX/3*2,                MAX/3*3
+// Arr[3]: {50,                 341,                     682,                    1023}
 
-//in test:			 246				 	  488					 742
+//in test:         246                        488                      742
 
 
 unsigned short boundaries[MAX_BUTTON_COUNT];
