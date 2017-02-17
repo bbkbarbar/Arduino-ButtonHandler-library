@@ -44,5 +44,5 @@ int getPressed();
 ### Full set of functions [ can be found in API.md](https://github.com/bbkbarbar/Arduino-ButtonHandler-library/blob/master/API.md)
 
 
-#### ToDo:
+### ToDo:
 - [ ] Try out to override the value of MAX_BUTTON_COUNT macro.
