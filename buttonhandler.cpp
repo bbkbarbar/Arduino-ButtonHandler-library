@@ -6,6 +6,9 @@
 #define ADC_MAX                    1023
 #define THRESHOLD_NOTHING_PRESSED    50
 #define NOTHING_PRESSED               0
+#ifndef MAX_BUTTON_COUNT
+	#define MAX_BUTTON_COUNT		 20
+#endif
 
 // btn count = 2
 //                   btn1			           btn2
@@ -24,16 +27,18 @@
 // Arr[3]: THNP,   MAX/3*1,                 MAX/3*2,                MAX/3*3     
 // Arr[3]: {50,                  341,                     682,                    1023}
 
+//in test:			 246				 	  488					 742
 
-unsigned short* boundaries;
+
+unsigned short boundaries[MAX_BUTTON_COUNT];
 
 
 void ButtonHandler::init(int adcPin, int buttonCount){
 	myAdcPin = adcPin;
 	btnCount = buttonCount;
 
-	unsigned short array[(btnCount+1)];
-	boundaries = array;
+	//unsigned short array[(btnCount+1)];
+	//boundaries = array;
 	boundaries[0] = THRESHOLD_NOTHING_PRESSED; 	// fixed lower boundary for first button
 
 	unsigned short i = 0;
@@ -43,8 +48,7 @@ void ButtonHandler::init(int adcPin, int buttonCount){
 
 	boundaries[btnCount] = ADC_MAX;
 
-	boundaries = array;
-	//*boundaries = array;
+	//boundaries = array;
 }
 
 
@@ -74,6 +78,13 @@ int ButtonHandler::getButtonIdForValue(int value){
 
 int ButtonHandler::getPressed(){
 	int adcVal = analogRead(myAdcPin);
+	if(debugMode){
+		if(adcVal > 25){
+			Serial.print("AdcVal: ");
+			Serial.print(String(adcVal));
+			Serial.print("\n");
+		}
+	}
 	return ButtonHandler::getButtonIdForValue(adcVal);
 }
 
@@ -88,4 +99,19 @@ int ButtonHandler::isPressedAny(){
 
 int ButtonHandler::isReleasedAll(){
 	return ((ButtonHandler::isPressedAny() == 0)?1:0);
+}
+
+// for debug purpose
+String ButtonHandler::getBoundaryValues(){
+	String res = "";
+	unsigned short i = 0;
+	for( ; i < btnCount+1; i++){
+		res += (String(boundaries[i]) + ", ");
+	}
+	res += "\n";
+	return res;
+}
+
+void ButtonHandler::setDebugMode(unsigned char status){
+	debugMode = status;
 }

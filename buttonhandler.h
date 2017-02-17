@@ -15,6 +15,7 @@ class ButtonHandler {
 	private:
 		int btnCount;
 		int myAdcPin;
+		unsigned char debugMode = 0;
 
 		/*
 		 * 	Return the ID of pressed button (ids starts from 1)
@@ -37,6 +38,12 @@ class ButtonHandler {
 	    
 	    int isPressedAny();
 	    int isReleasedAll();
+
+	    // Debug section
+	    
+	    String getBoundaryValues();
+
+	    void setDebugMode(unsigned char status);
 };
 
 #endif
