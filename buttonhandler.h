@@ -3,11 +3,18 @@
 #ifndef buttonhandler_h
 #define buttonhandler_h
 
-	#if defined(ARDUINO) && (ARDUINO >= 100)
-		#include <Arduino.h>
-	#else
-		#include <WProgram.h>
-	#endif
+#if defined(ARDUINO) && (ARDUINO >= 100)
+	#include <Arduino.h>
+#else
+	#include <WProgram.h>
+#endif
+
+
+#define BTN_UNDEFINED                -1
+#define BTN_HANDLER_ADC_MAX        1023
+#define THRESHOLD_NOTHING_PRESSED    50
+#define NOTHING_PRESSED               0
+//#define MAX_BUTTON_COUNT             20
 
 
 class ButtonHandler {

@@ -2,13 +2,10 @@
 
 #include "buttonhandler.h"
 
-#define BTN_UNDEFINED                -1
-#define ADC_MAX                    1023
-#define THRESHOLD_NOTHING_PRESSED    50
-#define NOTHING_PRESSED               0
-#ifndef MAX_BUTTON_COUNT
-	#define MAX_BUTTON_COUNT         20
-#endif
+
+//unsigned short boundaries[MAX_BUTTON_COUNT];
+unsigned short *boundaries;
+
 
 // btn count = 2
 //                   btn1                     btn2
@@ -30,23 +27,20 @@
 //in test:         246                        488                      742
 
 
-unsigned short boundaries[MAX_BUTTON_COUNT];
-
-
 void ButtonHandler::init(int adcPin, int buttonCount){
 	myAdcPin = adcPin;
 	btnCount = buttonCount;
 
 	//unsigned short array[(btnCount+1)];
-	//boundaries = array;
+	boundaries = new unsigned short[buttonCount+1];
 	boundaries[0] = THRESHOLD_NOTHING_PRESSED; 	// fixed lower boundary for first button
 
 	unsigned short i = 0;
 	for(i=1; i<btnCount; i++){
-		boundaries[i] = (unsigned short)((ADC_MAX / btnCount) * i);
+		boundaries[i] = (unsigned short)((BTN_HANDLER_ADC_MAX / btnCount) * i);
 	}
 
-	boundaries[btnCount] = ADC_MAX;
+	boundaries[btnCount] = BTN_HANDLER_ADC_MAX;
 
 	//boundaries = array;
 }
@@ -70,7 +64,7 @@ int ButtonHandler::getButtonIdForValue(int value){
 
 	}
 
-	if((value < 0) || (value > ADC_MAX)){
+	if((value < 0) || (value > BTN_HANDLER_ADC_MAX)){
 		return BTN_UNDEFINED;
 	}
 
