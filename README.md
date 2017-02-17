@@ -12,7 +12,9 @@ When no button pressed ADC shoul be pulled down to GND.
 ![Basic schematic with 3 buttons](https://raw.githubusercontent.com/bbkbarbar/Arduino-ButtonHandler-library/master/Docs/Schematic_with_5_buttons.png)
 
 ###### Important note:
-Resistor values can be changed, but all resistors must have the same value in the voltage divider line.
+Resistor values can be changed, but all resistors must have the same value in the voltage divider line <br>
+and the <b>total resistance</b> of voltage divider must be <b>at least 1kOhm</b><br>
+(To avoid unwanted energy consumption.) <br>
 The pull-down resistor must have much bigger value than the voltage divider's overall value. <br>
 It's important because we have to pull down the voltage of ADC pin to 0V when no buttons pressed (to avoid the "floating" state of ADC input),
 but we don't want to calculate the with pull-down resistor as part of the voltage divider.
