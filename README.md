@@ -45,7 +45,7 @@ int getPressed();
 ```
 
 
-### Full set of functions [ can be found in API.md](https://github.com/bbkbarbar/Arduino-ButtonHandler-library/blob/master/API.md)
+### Full set of functions [can be found in API.md](https://github.com/bbkbarbar/Arduino-ButtonHandler-library/blob/master/API.md)
 
 
 ### ToDo:
