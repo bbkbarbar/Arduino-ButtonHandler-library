@@ -19,6 +19,11 @@ The pull-down resistor must have much bigger value than the voltage divider's ov
 It's important because we have to pull down the voltage of ADC pin to 0V when no buttons pressed (to avoid the "floating" state of ADC input),
 but we don't want to calculate the with pull-down resistor as part of the voltage divider.
 
+### Installion
+
+- Clone or [download as a .zip file](https://github.com/bbkbarbar/Arduino-ButtonHandler-library/archive/master.zip) and unpack this repository directly into  "libraries" folder of Arduino IDE (e.g.: *c:\Program Files (x86)\Arduino\libraries\* )
+- Restart Arduino IDE.
+- Now you can find and use this library from *Sketch > Include library > "Arduino-Button-Handler-Library"*
 
 ### Most used functions
 ###### Initialize
